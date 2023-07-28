@@ -90,9 +90,9 @@ mod ERC721 {
 
   #[derive(Drop, starknet::Event)]
   struct Transfer {
-    from: starknet::ContractAddress,
+    from_: starknet::ContractAddress,
     to: starknet::ContractAddress,
-    token_id: u256,
+    tokenId: u256,
   }
 
   #[derive(Drop, starknet::Event)]
@@ -376,7 +376,7 @@ mod ERC721 {
       // Emit event
       self.emit(
         Event::Transfer(
-          Transfer { from: Zeroable::zero(), to, token_id }
+          Transfer { from_: Zeroable::zero(), to, tokenId: token_id }
         )
       );
     }
@@ -404,7 +404,7 @@ mod ERC721 {
       // Emit event
       self.emit(
         Event::Transfer(
-          Transfer { from, to, token_id }
+          Transfer { from_: from, to, tokenId: token_id }
         )
       );
     }
@@ -424,7 +424,7 @@ mod ERC721 {
       // Emit event
       self.emit(
         Event::Transfer(
-          Transfer { from: owner, to: Zeroable::zero(), token_id }
+          Transfer { from_: owner, to: Zeroable::zero(), tokenId: token_id }
         )
       )
     }
